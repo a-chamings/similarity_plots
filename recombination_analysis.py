@@ -67,11 +67,12 @@ def random_string(rdm_strlen):
 	return random_string
 
 def show_usage():
-	print("Usage: recombination_analysis.py -i <fasta alignment> -w <window size> -n <nt step>\n")
+	print("Usage: recombination_analysis.py -i <fasta alignment> -w <window size> -n <nt step>\n -o <output directory>")
 	print("\t-i: An alignment in fasta format")
 	print("\t-w: size of sliding window in nucleotides. Default: ("+str(window)+")")
 	print("\t-n: size of step in nucleoditdes. Default: ("+str(step)+")")
 	print("\t-o: output directory to save plots")
+	print("\t-s Only display the most similar sequences in the plot (useful for large alignments)")
 	exit(0)
 
 def main(argv):
@@ -91,6 +92,8 @@ def main(argv):
 		exit(0)
 	
 	
+	#used to check if only most similar sequences displayed in plot
+	display_most_similar=False
 	
 	while arg_count<args:
 		arg=argv[arg_count]
@@ -109,6 +112,10 @@ def main(argv):
 		if argv[arg_count]=="-o" or argv[arg_count]=="--output":
 			output_dir=str(argv[arg_count+1])
 			arg_count=arg_count+1
+		
+		if argv[arg_count]=="-s":
+			display_most_similar=True
+		
 		
 		arg_count=arg_count+1
 		
@@ -265,7 +272,8 @@ def main(argv):
 			
 			
 			else:
-				line=plt.plot(similarity_df.index.astype(str),similarity_df[c].astype(float),linestyle="-",linewidth=1)
+				if display_most_similar==False:
+					line=plt.plot(similarity_df.index.astype(str),similarity_df[c].astype(float),linestyle="-",linewidth=1)
 			
 			
 			
