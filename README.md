@@ -13,8 +13,9 @@ This script will output a plot for each sequence comparing it against all others
 
 The default setting is a 200nt window with 20nt steps but these can be altered viaarguments when the script is run.
 
-Usage: recombination_analysis.py -i <fasta alignment> -w <window size> -n <nt step>\n -o <output directory>
+Usage: recombination_analysis.py -i <fasta alignment> -w <window size> -n <nt step>\n -o <output directory> -s
 	-i: An alignment in fasta format
 	-w: size of sliding window in nucleotides. Default: 200
 	-n: size of step in nucleoditdes. Default: 20
 	-o: output directory in which plots are saved
+ 	-s: Only display the most similar sequences in the plot (useful for large alignments) without -s all sequences are shown on plot
